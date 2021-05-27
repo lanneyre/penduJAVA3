@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Mot {
     public ArrayList<String> listeMots;
     public String motATrouver;
+    public String motADisplay;
 
     Mot(){
         this.listeMots = new ArrayList<String>();
@@ -66,6 +68,13 @@ public class Mot {
         this.listeMots.add("Gribouiller");
         this.listeMots.add("Locomotive");
         this.listeMots.add("Chenil");
+        this.listeMots.add("Parthenogenese");
+        this.listeMots.add("Polymorphisme");
+        this.listeMots.add(35, "Emargement");
+        this.listeMots.add("Apres Midi");
+        //exemple de tri sur liste de chaînes de caractères
+        //this.listeMots.sort(null);
+        //System.out.println(this.listeMots);
     }
 
     public void motRandom(){
@@ -90,22 +99,42 @@ public class Mot {
 		// String charFound = new String (wordTab);
 		// return charFound;
     }*/
+    
+    
     public void displayMot(ArrayList<Character> chosenLetters){
         //char[] wordTab = new char[this.motATrouver.length()];
+    	this.motADisplay = "";
         for(int i = 0; i < this.motATrouver.length(); i++){
             //System.out.print(this.motATrouver.charAt(i));
             if(chosenLetters.contains(this.motATrouver.charAt(i))){
-                System.out.print(this.motATrouver.charAt(i));
+                this.motADisplay += this.motATrouver.charAt(i);
             } else {
-                System.out.print("_");
+                this.motADisplay += "_";
             }
-            System.out.print(" ");
+            this.motADisplay += " ";
         }
-        System.out.println("");
+        System.out.println(this.motADisplay);
+        
     }
-
-    public boolean checkLettre(char lettre){
-        char[] wordTab = new char[this.motATrouver.length()];
+    
+    
+    public boolean checkMotATrouver(char lettre) {
+    	return this.checkLettre(lettre, this.motATrouver);
+    }
+    
+    //possibilité de chercher un caractère dans le mot a display, par exemple les '_' pour condition de victoire 
+    public boolean checkMotADisplay(char lettre) {
+    	return this.checkLettre(lettre, this.motADisplay);
+    }
+    
+    //trouve une lettre dans un mot
+    public boolean checkLettre(char lettre, String mot){
+    	//on crée et on remplit le tableau de caractères avec le contenu du mot à trouver
+        char[] wordTab = new char[mot.length()];
+        mot.toLowerCase().getChars(0, mot.length(), wordTab, 0);
+        lettre = Character.toLowerCase(lettre);
+        //System.out.println("tableau de caractères : " + Arrays.toString(wordTab));
+        //puis on vérifie si la lettre est bien dedans
         for(int i = 0; i < wordTab.length; i++){
             if(wordTab[i] == lettre ){
                 return true;

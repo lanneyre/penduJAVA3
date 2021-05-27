@@ -5,8 +5,10 @@ public class Utilisateur {
     public ArrayList<Character> historique;
 
     Utilisateur(){
-        this.nbChances = 6;
+        this.nbChances = 7;
         this.historique = new ArrayList<Character>();
+        //ajouter à la liste de caractères l'espace vide permet de jouer des mots en plusieurs parties
+        this.historique.add(' ');
     }
 
     public char faireProposition(){
